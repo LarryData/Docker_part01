@@ -1,0 +1,145 @@
+Last login: Mon Oct 16 12:20:43 on ttys001
+(base) macbook@mbp-de-macbook ~ % docker run --detach --name mon_nginx --publish 80:80 nginx
+
+Unable to find image 'nginx:latest' locally
+latest: Pulling from library/nginx
+1bc163a14ea6: Pull complete 
+9f9620a32f92: Pull complete 
+3a14710b38f2: Pull complete 
+b11945dd1369: Pull complete 
+f753bf39c726: Pull complete 
+921dfdc6a1c8: Pull complete 
+7b1d4e455094: Pull complete 
+Digest: sha256:b4af4f8b6470febf45dc10f564551af682a802eda1743055a7dfc8332dffa595
+Status: Downloaded newer image for nginx:latest
+12a46a000264852ca25a171daa6f808007c5243dc52d52936f13e807efdad33b
+(base) macbook@mbp-de-macbook ~ % docker run --detach --name mon_mysql --publish 3306:3306 -e MYSQL_RANDOM_ROOT_PASSWORD=yes mysql
+
+Unable to find image 'mysql:latest' locally
+latest: Pulling from library/mysql
+89ec84aa94fe: Pull complete 
+2047d0a85fcf: Pull complete 
+a981666a88bb: Pull complete 
+7aa9dbd75443: Pull complete 
+b8ed90386e32: Pull complete 
+0b36981941b7: Pull complete 
+ca996c23fc53: Pull complete 
+15050e9043e6: Pull complete 
+3ecfc97ced27: Pull complete 
+e435e3bf4d77: Pull complete 
+Digest: sha256:1ee299bf9eb8d2218fcb4fad666a090c92caef48ce524e6edce35f2e2d55170d
+Status: Downloaded newer image for mysql:latest
+803d5eb3e0f46a0fb9c2f34080c106088c4c1860b82c59c187e911e41059bf30
+(base) macbook@mbp-de-macbook ~ % docker run --detach --name mon_httpd --publish 8080:80 httpd
+
+Unable to find image 'httpd:latest' locally
+latest: Pulling from library/httpd
+1bc163a14ea6: Already exists 
+a66226dee060: Pull complete 
+007bcd7d2f84: Pull complete 
+de1d4ec7d195: Pull complete 
+ea6499a7b54d: Pull complete 
+Digest: sha256:5201524443f9026753e25540a44495b7f6e6ca706c71208bb3a5f2daac205c31
+Status: Downloaded newer image for httpd:latest
+66b8dc7c53ed7cb525e660d391362300a6f78fb092933503c69af6a616c9dae6
+(base) macbook@mbp-de-macbook ~ % docker run --detach --name mon_nginx --publish 80:80 nginx
+
+docker: Error response from daemon: Conflict. The container name "/mon_nginx" is already in use by container "12a46a000264852ca25a171daa6f808007c5243dc52d52936f13e807efdad33b". You have to remove (or rename) that container to be able to reuse that name.
+See 'docker run --help'.
+(base) macbook@mbp-de-macbook ~ % docker container logs mon_mysql
+
+2023-10-16 15:25:43+00:00 [Note] [Entrypoint]: Entrypoint script for MySQL Server 8.1.0-1.el8 started.
+2023-10-16 15:25:43+00:00 [Note] [Entrypoint]: Switching to dedicated user 'mysql'
+2023-10-16 15:25:43+00:00 [Note] [Entrypoint]: Entrypoint script for MySQL Server 8.1.0-1.el8 started.
+2023-10-16 15:25:43+00:00 [Note] [Entrypoint]: Initializing database files
+2023-10-16T15:25:43.429794Z 0 [System] [MY-015017] [Server] MySQL Server Initialization - start.
+2023-10-16T15:25:43.430547Z 0 [Warning] [MY-011068] [Server] The syntax '--skip-host-cache' is deprecated and will be removed in a future release. Please use SET GLOBAL host_cache_size=0 instead.
+2023-10-16T15:25:43.430587Z 0 [System] [MY-013169] [Server] /usr/sbin/mysqld (mysqld 8.1.0) initializing of server in progress as process 80
+2023-10-16T15:25:43.433913Z 1 [System] [MY-013576] [InnoDB] InnoDB initialization has started.
+2023-10-16T15:25:43.561055Z 1 [System] [MY-013577] [InnoDB] InnoDB initialization has ended.
+2023-10-16T15:25:44.068916Z 6 [Warning] [MY-010453] [Server] root@localhost is created with an empty password ! Please consider switching off the --initialize-insecure option.
+2023-10-16T15:25:45.497406Z 0 [System] [MY-015018] [Server] MySQL Server Initialization - end.
+2023-10-16 15:25:45+00:00 [Note] [Entrypoint]: Database files initialized
+2023-10-16 15:25:45+00:00 [Note] [Entrypoint]: Starting temporary server
+2023-10-16T15:25:45.527604Z 0 [System] [MY-015015] [Server] MySQL Server - start.
+2023-10-16T15:25:45.691021Z 0 [Warning] [MY-011068] [Server] The syntax '--skip-host-cache' is deprecated and will be removed in a future release. Please use SET GLOBAL host_cache_size=0 instead.
+2023-10-16T15:25:45.691975Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.1.0) starting as process 124
+2023-10-16T15:25:45.698491Z 1 [System] [MY-013576] [InnoDB] InnoDB initialization has started.
+2023-10-16T15:25:45.758518Z 1 [System] [MY-013577] [InnoDB] InnoDB initialization has ended.
+2023-10-16T15:25:45.839875Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+2023-10-16T15:25:45.839898Z 0 [System] [MY-013602] [Server] Channel mysql_main configured to support TLS. Encrypted connections are now supported for this channel.
+2023-10-16T15:25:45.840506Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+2023-10-16T15:25:45.846174Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Socket: /var/run/mysqld/mysqlx.sock
+2023-10-16T15:25:45.846217Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.1.0'  socket: '/var/run/mysqld/mysqld.sock'  port: 0  MySQL Community Server - GPL.
+2023-10-16T15:25:45.847172Z 0 [System] [MY-015016] [Server] MySQL Server - end.
+2023-10-16 15:25:45+00:00 [Note] [Entrypoint]: Temporary server started.
+'/var/lib/mysql/mysql.sock' -> '/var/run/mysqld/mysqld.sock'
+Warning: Unable to load '/usr/share/zoneinfo/iso3166.tab' as time zone. Skipping it.
+Warning: Unable to load '/usr/share/zoneinfo/leap-seconds.list' as time zone. Skipping it.
+Warning: Unable to load '/usr/share/zoneinfo/leapseconds' as time zone. Skipping it.
+Warning: Unable to load '/usr/share/zoneinfo/tzdata.zi' as time zone. Skipping it.
+Warning: Unable to load '/usr/share/zoneinfo/zone.tab' as time zone. Skipping it.
+Warning: Unable to load '/usr/share/zoneinfo/zone1970.tab' as time zone. Skipping it.
+2023-10-16 15:25:46+00:00 [Note] [Entrypoint]: GENERATED ROOT PASSWORD: tm1Z6H0af+K12eiZlyhdiLUF4J5kcpNs
+
+2023-10-16 15:25:46+00:00 [Note] [Entrypoint]: Stopping temporary server
+2023-10-16T15:25:46.613444Z 10 [System] [MY-013172] [Server] Received SHUTDOWN from user root. Shutting down mysqld (Version: 8.1.0).
+2023-10-16T15:25:47.417476Z 0 [System] [MY-010910] [Server] /usr/sbin/mysqld: Shutdown complete (mysqld 8.1.0)  MySQL Community Server - GPL.
+2023-10-16T15:25:47.423290Z 0 [System] [MY-015016] [Server] MySQL Server - end.
+2023-10-16 15:25:47+00:00 [Note] [Entrypoint]: Temporary server stopped
+
+2023-10-16 15:25:47+00:00 [Note] [Entrypoint]: MySQL init process done. Ready for start up.
+
+2023-10-16T15:25:47.650189Z 0 [System] [MY-015015] [Server] MySQL Server - start.
+2023-10-16T15:25:47.817791Z 0 [Warning] [MY-011068] [Server] The syntax '--skip-host-cache' is deprecated and will be removed in a future release. Please use SET GLOBAL host_cache_size=0 instead.
+2023-10-16T15:25:47.818444Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.1.0) starting as process 1
+2023-10-16T15:25:47.821382Z 1 [System] [MY-013576] [InnoDB] InnoDB initialization has started.
+2023-10-16T15:25:47.873008Z 1 [System] [MY-013577] [InnoDB] InnoDB initialization has ended.
+2023-10-16T15:25:47.937768Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+2023-10-16T15:25:47.937790Z 0 [System] [MY-013602] [Server] Channel mysql_main configured to support TLS. Encrypted connections are now supported for this channel.
+2023-10-16T15:25:47.938404Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+2023-10-16T15:25:47.944732Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Bind-address: '::' port: 33060, socket: /var/run/mysqld/mysqlx.sock
+2023-10-16T15:25:47.944770Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.1.0'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.
+(base) macbook@mbp-de-macbook ~ % docker stop $(docker ps -a -q)
+
+66b8dc7c53ed
+803d5eb3e0f4
+12a46a000264
+(base) macbook@mbp-de-macbook ~ % docker rm $(docker ps -a -q)
+
+66b8dc7c53ed
+803d5eb3e0f4
+12a46a000264
+(base) macbook@mbp-de-macbook ~ % docker rmi $(docker images -q)
+
+Untagged: nginx:latest
+Untagged: nginx@sha256:b4af4f8b6470febf45dc10f564551af682a802eda1743055a7dfc8332dffa595
+Deleted: sha256:12ef77b9fab686eea5e3fd0d6f3c7b2763eaeb657f037121335a60805d3be8a7
+Deleted: sha256:34c538d9979c389f00f45bb580f3c573843ec2b46361deec317eeea6c695d0b0
+Deleted: sha256:c2e494e382708ee3db4d1a4c2d63fcda17db07ed16a218bcf2dbc8a19e0bd7b9
+Deleted: sha256:787586e60123360f8a7c6a43cc90e1b57830a8808bafd630b66039bf697f534a
+Deleted: sha256:6a615062d8704dc973c686c2f92d09acfb55545fd6f314738f48be9d59644f0f
+Deleted: sha256:e97ff8ca4fd6605691561a1ac7e78a57804f082c0f05e7d8541412014381b8d7
+Deleted: sha256:f8148c1e93eaa05409d80a7e0b7b2de0d2e05da811ad52c5923d1e86e97b1b07
+Untagged: httpd:latest
+Untagged: httpd@sha256:5201524443f9026753e25540a44495b7f6e6ca706c71208bb3a5f2daac205c31
+Deleted: sha256:8749b388d3295807ec3ee893a37cf88249f9a3de1b7913dbd757384d2dbf993c
+Deleted: sha256:2d60f87d36a991d423c4f61b474d03b17d2c3f5c242b48ce4de6a14ecbf116a4
+Deleted: sha256:c82fec8186ed96f98fa37fc5d1d4dc6e3a222b760671128a900117ac8d901e00
+Deleted: sha256:8e7113f4546c597cf93051e1f4bb77c92142ae04950a5ce6388b939829bef3f1
+Deleted: sha256:6cef4ff56fe28852faeebef597edd576957d73046122d2c1b5d8db8243c9cacc
+Deleted: sha256:32f2ee38f285d7a349380070ea0dbfa284c9181e5e8b1a736f7a9eca726b1027
+Untagged: mysql:latest
+Untagged: mysql@sha256:1ee299bf9eb8d2218fcb4fad666a090c92caef48ce524e6edce35f2e2d55170d
+Deleted: sha256:d30a00232fdc87bddbd635dad0486bf2278d705c76af20ec01f0814d0481064f
+Deleted: sha256:b9d4e3ec1664c1d4b78b741f55fca829558c3bc3fea4c4d371606e85f097d087
+Deleted: sha256:067184a3fa9135c7f320b27f4eb8af3b1e168e69aa30132f9017fd74e03ac1c4
+Deleted: sha256:69c8ff5d9206801f7640669eb0362c9ad1016773365c10950a03ffe04323126c
+Deleted: sha256:db585a0dd20ff5f1af0ff581d59c47bbabfc89b1ab71eaba2e3d331ccf976db6
+Deleted: sha256:bc016d48ede0b8d51ab11de2864d196fd0d10773d0caeae3520612e3a31c451b
+Deleted: sha256:463d303888d0c1687bcf69c77860d61bd70e86d20dee8e336d0df2fb7ccec1f3
+Deleted: sha256:b5db78f2ff84d20eca83a7e61d365e832f979e625796359c3bd9c92697587a0a
+Deleted: sha256:b7df2a9670efb1be79d41fe8f5589f81c0c21396104c65a9ab52b55a83ba1cef
+Deleted: sha256:cc453d8d127a41d1dd871616f6d4c643b383231dd8212d4347c6e3f977aa161b
+Deleted: sha256:07f93a4b2e76c380da268615b74e82e21bce3cd9727dbe0ea72d282605c07796
+(base) macbook@mbp-de-macbook ~ % 
